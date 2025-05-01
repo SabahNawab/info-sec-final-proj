@@ -1,127 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>PQC Flask App</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
+      body {
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+      }
 
-        .left-panel {
-            width: 35%;
-            background-color: #1c1c1c;
-            color: white;
-            padding: 30px;
-            box-sizing: border-box;
-            overflow-y: auto;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-        }
+      .left-panel {
+        /* Left Panel */
+        width: 35%;
+        background-color: #1c1c1c;
+        color: white;
+        padding: 30px;
+        box-sizing: border-box;
+        overflow-y: auto;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+      }
 
-        .left-panel h2 {
-            margin-top: 0;
-            font-size: 22px;
-        }
+      .left-panel h2 {
+        margin-top: 0;
+        font-size: 22px;
+      }
 
-        .left-panel p {
-            margin: 10px 0;
-            font-size: 15px;
-            word-break: break-word;
-        }
+      .left-panel p {
+        margin: 10px 0;
+        font-size: 15px;
+        word-break: break-word;
+      }
 
-        textarea.key-output, textarea#messageInput, textarea#encryptedInput {
-            width: 100%;
-            font-family: monospace;
-            height: 100px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-        }
+      textarea.key-output,
+      textarea#messageInput,
+      textarea#encryptedInput {
+        width: 100%;
+        font-family: monospace;
+        height: 100px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+      }
 
-        .right-panel {
-            width: 65%;
-            padding: 30px;
-            background-color: #f5f5f5;
-            box-sizing: border-box;
-            overflow-y: auto;
-            height: 100vh;
-            position: relative;
-        }
+      .right-panel {
+        width: 65%;
+        padding: 30px;
+        background-color: #f5f5f5;
+        box-sizing: border-box;
+        overflow-y: auto;
+        height: 100vh;
+        position: relative;
+      }
 
-        button.generate-btn {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            border-radius: 0;
-            transition: background-color 0.3s, color 0.3s, border 0.3s;
-        }
+      button.generate-btn {
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-radius: 0;
+        transition: background-color 0.3s, color 0.3s, border 0.3s;
+      }
 
-        button.generate-btn:hover {
-            background-color: white;
-            color: black;
-            border: 2px solid black;
-        }
+      button.generate-btn:hover {
+        background-color: white;
+        color: black;
+        border: 2px solid black;
+      }
 
-        button.encrypt-btn, button.decrypt-btn {
-            background-color: black;
-            color: white;
-            border: 2px solid black;
-            padding: 10px 20px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            border-radius: 0;
-            transition: background-color 0.3s, color 0.3s, border 0.3s;
-        }
+      button.encrypt-btn,
+      button.decrypt-btn {
+        background-color: black;
+        color: white;
+        border: 2px solid black;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-radius: 0;
+        transition: background-color 0.3s, color 0.3s, border 0.3s;
+      }
 
-        button.encrypt-btn:hover, button.decrypt-btn:hover {
-            background-color: transparent;
-            color: black;
-            border: 2px solid black;
-        }
+      button.encrypt-btn:hover,
+      button.decrypt-btn:hover {
+        background-color: transparent;
+        color: black;
+        border: 2px solid black;
+      }
 
-        .output {
-            white-space: pre-wrap;
-            background: #fff;
-            padding: 10px;
-            border: 1px solid #ccc;
-            min-height: 60px;
-            margin-bottom: 10px;
-        }
+      .output {
+        white-space: pre-wrap;
+        background: #fff;
+        padding: 10px;
+        border: 1px solid #ccc;
+        min-height: 60px;
+        margin-bottom: 10px;
+      }
 
-        h2 {
-            font-size: 24px;
-            margin-top: 0;
-        }
-        .main-box {
-            display: flex;
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            overflow: hidden;
-            height: calc(100vh - 60px);
-        }
-        
+      h2 {
+        font-size: 24px;
+        margin-top: 0;
+      }
+      .main-box {
+        display: flex;
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        overflow: hidden;
+        height: calc(100vh - 60px);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="main-box">
-    <div class="left-panel">
+      <div class="left-panel">
         <h2>Key Generation</h2>
         <button id="generateKeys" class="generate-btn">Generate Keys</button>
 
@@ -130,84 +137,90 @@
 
         <p><strong>Private Key (Base64):</strong></p>
         <textarea readonly class="key-output" id="privateKeyDisplay"></textarea>
-    </div>
+      </div>
 
-    <div class="right-panel">
+      <div class="right-panel">
         <h2>Encryption</h2>
-        <textarea id="messageInput" placeholder="Enter message to encrypt"></textarea>
+        <textarea
+          id="messageInput"
+          placeholder="Enter message to encrypt"
+        ></textarea>
         <button id="encryptBtn" class="encrypt-btn">Encrypt</button>
         <div class="output" id="encryptResult"></div>
 
         <h2>Decryption</h2>
-        <textarea id="encryptedInput" placeholder="Paste encrypted message here..."></textarea>
+        <textarea
+          id="encryptedInput"
+          placeholder="Paste encrypted message here..."
+        ></textarea>
         <button id="decryptBtn" class="decrypt-btn">Decrypt</button>
         <div class="output" id="decryptResult"></div>
+      </div>
     </div>
-</div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>
-        $('#generateKeys').click(function () {
-            $.ajax({
-                url: '/key_gen',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({}),
-                success: function (response) {
-                    $('#publicKeyDisplay').val(response.public_key);
-                    $('#privateKeyDisplay').val(response.private_key);
-                },
-                error: function () {
-                    alert('Failed to generate keys.');
-                }
-            });
+      $("#generateKeys").click(function () {
+        $.ajax({
+          url: "/key_gen",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({}),
+          success: function (response) {
+            $("#publicKeyDisplay").val(response.public_key);
+            $("#privateKeyDisplay").val(response.private_key);
+          },
+          error: function () {
+            alert("Failed to generate keys.");
+          },
         });
+      });
 
-        $('#encryptBtn').click(function () {
-            const message = $('#messageInput').val();
-            if (!message) {
-                alert('Please enter a message to encrypt.');
-                return;
-            }
+      $("#encryptBtn").click(function () {
+        const message = $("#messageInput").val();
+        if (!message) {
+          alert("Please enter a message to encrypt.");
+          return;
+        }
 
-            $.ajax({
-                url: '/encryption',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ message: message }),
-                success: function (response) {
-                    // Only show encrypted message without "Encapsulated Ciphertext" label
-                    $('#encryptResult').html(`
+        $.ajax({
+          url: "/encryption",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ message: message }),
+          success: function (response) {
+            // Only show encrypted message without "Encapsulated Ciphertext" label
+            $("#encryptResult").html(`
                         <textarea readonly rows="4" style="width:100%;">${response.encrypted_msg}</textarea>
                     `);
-                },
-                error: function (xhr) {
-                    alert(xhr.responseJSON?.error || 'Encryption failed.');
-                }
-            });
+          },
+          error: function (xhr) {
+            alert(xhr.responseJSON?.error || "Encryption failed.");
+          },
         });
+      });
 
-        $('#decryptBtn').click(function () {
-            const encryptedMsg = $('#encryptedInput').val();
-            if (!encryptedMsg) {
-                alert('Please enter an encrypted message to decrypt.');
-                return;
-            }
+      $("#decryptBtn").click(function () {
+        const encryptedMsg = $("#encryptedInput").val();
+        if (!encryptedMsg) {
+          alert("Please enter an encrypted message to decrypt.");
+          return;
+        }
 
-            $.ajax({
-                url: '/decryption',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ encrypted_msg: encryptedMsg }),
-                success: function (response) {
-                    $('#decryptResult').html(`
+        $.ajax({
+          url: "/decryption",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ encrypted_msg: encryptedMsg }),
+          success: function (response) {
+            $("#decryptResult").html(`
                         <textarea readonly rows="4" style="width:100%;">${response.decrypted_msg}</textarea>
                     `);
-                },
-                error: function (xhr) {
-                    alert(xhr.responseJSON?.error || 'Decryption failed.');
-                }
-            });
+          },
+          error: function (xhr) {
+            alert(xhr.responseJSON?.error || "Decryption failed.");
+          },
         });
+      });
     </script>
-</body>
+  </body>
 </html>
